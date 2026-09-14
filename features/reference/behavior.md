@@ -33,6 +33,7 @@ They do **not** authorize new scope; implement only from `features/feature-*.md`
 
 | Defect | Where | Provenance |
 |--------|-------|------------|
-| Missing required field on any `create` endpoint (`users`, `recipes`, `recipeSteps`, `recipeIngredients`, `ingredients`) crashes the Node process instead of returning `400` | `*.controller.js` — synchronous `throw` inside an `async` handler, no `try/catch`, no global Express error handler | Feature 1 Edge Cases |
+| Missing required field on `users` or `recipeIngredients` create crashes the Node process instead of returning `400` (both controllers declare `create` as `async`) | `user.controller.js`, `recipeIngredient.controller.js` — synchronous `throw` inside an `async` handler, no `try/catch`, no global Express error handler | Feature 1 Edge Cases |
+| Missing required field on `recipes`, `recipeSteps`, or `ingredients` create returns a real `400` but as an HTML stack-trace body, not the app's usual `{ message }` JSON (these `create` handlers are non-`async`, so Express's default error handler catches the throw safely) | `recipe.controller.js`, `recipeStep.controller.js`, `ingredient.controller.js` | Feature 2 Edge Cases |
 | A malformed `Bearer` token (not valid AES-256-GCM ciphertext) crashes the process in `decrypt()`/`authenticateRoute` instead of returning `401` | `backend/app/authentication/crypto.js`, `authentication.js` | Feature 1 Edge Cases |
 | `users.email` has no database-level unique constraint | `user.model.js` | Feature 1 Edge Cases |
