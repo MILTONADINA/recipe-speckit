@@ -208,7 +208,7 @@ For this course, **you** write the requirements half and the **data model**. You
 | ID | File | Branch | Depends on |
 |----|------|--------|------------|
 | 1 | [feature-1-user-authentication-session-management.md](features/feature-1-user-authentication-session-management.md) | `feature/1-user-authentication-session-management` | — |
-| 2 | *Add `feature-2-….md` after you write the spec* | `feature/2-…` | Feature 1 |
+| 2 | [feature-2-recipe-management.md](features/feature-2-recipe-management.md) | `feature/2-recipe-management` | Feature 1 |
 | 3 | *Add `feature-3-….md` after you write the spec* | `feature/3-…` | Feature 1 |
 | 4 | *Add `feature-4-….md` after you write the spec* | `feature/4-…` | Feature 2 |
 | 5 | *Add `feature-5-….md` after you write the spec* | `feature/5-…` | Feature 2 |

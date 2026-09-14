@@ -1,6 +1,6 @@
 # Behavior & Rules Reference
 
-**Living snapshot** of product rules on integrated `dev` after Feature 1.
+**Living snapshot** of product rules on integrated `dev` after Features 1–2.
 
 These files answer: *"What rules does the app enforce right now?"*
 They do **not** authorize new scope; implement only from `features/feature-*.md`.
@@ -29,6 +29,18 @@ They do **not** authorize new scope; implement only from `features/feature-*.md`
 | Visiting the Login page always clears any stored session | `Login.vue` `onMounted` | Feature 1 FR-014 |
 | A stored session persists across reloads on every other route | `MenuBar.vue` reads `localStorage` on mount; `apiClient` attaches the Bearer token on every request | Feature 1 FR-015 |
 
+## Recipes, steps, and recipe ingredients
+
+| Rule | Enforcement | Provenance |
+|------|-------------|------------|
+| "My recipes" is scoped to the signed-in user | `GET /recipeapi/recipes/user/:userId` | Feature 2 FR-005 |
+| Signed-out browsing only sees published recipes | `GET /recipeapi/recipes` → `WHERE isPublished = true` | Feature 2 FR-006 |
+| A single recipe read returns an array (`findAll`, not `findByPk`) | `recipe.controller.js#findOne` | Feature 2 FR-007 |
+| Only the recipe's owner may update it | `recipe.controller.js#update` → `404` for a non-owner | Feature 2 FR-008 |
+| Only the recipe's owner may add an ingredient to it | `recipeIngredient.controller.js#create` → `404` for a non-owner | Feature 2 FR-010 |
+| A recipe ingredient's `recipeStepId` starts `null` and is set when assigned to a step from the step dialog | `EditRecipe.vue#checkUpdateIngredient` | Feature 2 FR-011, FR-015 |
+| Recipe ingredient/step reads are public | `GET .../recipeIngredients`, `GET .../recipeStepsWithIngredients` | Feature 2 FR-012, FR-014 |
+
 ## Known defects (documented, not fixed — team decision)
 
 | Defect | Where | Provenance |
@@ -37,3 +49,7 @@ They do **not** authorize new scope; implement only from `features/feature-*.md`
 | Missing required field on `recipes`, `recipeSteps`, or `ingredients` create returns a real `400` but as an HTML stack-trace body, not the app's usual `{ message }` JSON (these `create` handlers are non-`async`, so Express's default error handler catches the throw safely) | `recipe.controller.js`, `recipeStep.controller.js`, `ingredient.controller.js` | Feature 2 Edge Cases |
 | A malformed `Bearer` token (not valid AES-256-GCM ciphertext) crashes the process in `decrypt()`/`authenticateRoute` instead of returning `401` | `backend/app/authentication/crypto.js`, `authentication.js` | Feature 1 Edge Cases |
 | `users.email` has no database-level unique constraint | `user.model.js` | Feature 1 Edge Cases |
+| `POST /recipeapi/recipes` trusts `req.body.userId` rather than `req.user.id` (not reachable via the shipped UI) | `recipe.controller.js#create` | Feature 2 Edge Cases |
+| Recipe **delete** has no ownership check — any authenticated user can delete any recipe (not wired to any screen) | `recipe.controller.js#delete` | Feature 2 Data Ownership & Isolation |
+| Recipe **step** create/update/delete have no ownership check on the parent recipe at all | `recipeStep.controller.js` | Feature 2 Data Ownership & Isolation |
+| Recipe **ingredient** update/delete have no ownership check (only `create` is scoped) | `recipeIngredient.controller.js` | Feature 2 Data Ownership & Isolation |
