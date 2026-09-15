@@ -1,6 +1,6 @@
 # Behavior & Rules Reference
 
-**Living snapshot** of product rules on integrated `dev` after Features 1–2.
+**Living snapshot** of product rules on integrated `dev` after Features 1–4 (Feature 5 PDF rules land when this feature merges).
 
 These files answer: *"What rules does the app enforce right now?"*
 They do **not** authorize new scope; implement only from `features/feature-*.md`.
@@ -40,6 +40,17 @@ They do **not** authorize new scope; implement only from `features/feature-*.md`
 | Only the recipe's owner may add an ingredient to it | `recipeIngredient.controller.js#create` → `404` for a non-owner | Feature 2 FR-010 |
 | A recipe ingredient's `recipeStepId` starts `null` and is set when assigned to a step from the step dialog | `EditRecipe.vue#checkUpdateIngredient` | Feature 2 FR-011, FR-015 |
 | Recipe ingredient/step reads are public | `GET .../recipeIngredients`, `GET .../recipeStepsWithIngredients` | Feature 2 FR-012, FR-014 |
+
+## Recipe PDF export
+
+| Rule | Enforcement | Provenance |
+|------|-------------|------------|
+| PDF icon shows only when a `user` is in `localStorage` | `RecipeCardComponent.vue` `v-if="user !== null"` on `mdi-file-pdf-box` | Feature 5 FR-001, FR-002 |
+| Clicking PDF runs client-side jsPDF generation (no PDF API) | `RecipeReports.generateRecipePDF` | Feature 5 FR-003, FR-011 |
+| Generator loads public ingredient and step-with-ingredient GETs for that recipe id | `RecipeIngredientServices`, `RecipeStepServices` | Feature 5 FR-004, FR-005 |
+| PDF includes name, description, Ingredients lines, Steps table; file name is `recipeReport.pdf` | `RecipeReports.js` | Feature 5 FR-006–FR-009 |
+| PDF click does not navigate to edit | `@click.stop` on the PDF icon | Feature 5 FR-010 |
+| Failed ingredient/step fetches are logged; download still proceeds | `.catch(console.log)` then `doc.save` | Feature 5 FR-012 |
 
 ## Known defects (documented, not fixed — team decision)
 
