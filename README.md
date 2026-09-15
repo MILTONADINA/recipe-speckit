@@ -209,7 +209,7 @@ For this course, **you** write the requirements half and the **data model**. You
 |----|------|--------|------------|
 | 1 | [feature-1-user-authentication-session-management.md](features/feature-1-user-authentication-session-management.md) | `feature/1-user-authentication-session-management` | — |
 | 2 | [feature-2-recipe-management.md](features/feature-2-recipe-management.md) | `feature/2-recipe-management` | Feature 1 |
-| 3 | *Add `feature-3-….md` after you write the spec* | `feature/3-…` | Feature 1 |
+| 3 | [feature-3-ingredient-catalog.md](features/feature-3-ingredient-catalog.md) | `feature/3-ingredient-catalog` | Feature 1 |
 | 4 | [feature-4-public-recipe-publishing-browsing.md](features/feature-4-public-recipe-publishing-browsing.md) | `feature/4-public-recipe-publishing-browsing` | Feature 2 |
 | 5 | *Add `feature-5-….md` after you write the spec* | `feature/5-…` | Feature 2 |
 
