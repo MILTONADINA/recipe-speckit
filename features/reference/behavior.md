@@ -45,12 +45,11 @@ They do **not** authorize new scope; implement only from `features/feature-*.md`
 
 | Rule | Enforcement | Provenance |
 |------|-------------|------------|
-| PDF icon shows only when a `user` is in `localStorage` | `RecipeCardComponent.vue` `v-if="user !== null"` on `mdi-file-pdf-box` | Feature 5 FR-001, FR-002 |
-| Clicking PDF runs client-side jsPDF generation (no PDF API) | `RecipeReports.generateRecipePDF` | Feature 5 FR-003, FR-011 |
-| Generator loads public ingredient and step-with-ingredient GETs for that recipe id | `RecipeIngredientServices`, `RecipeStepServices` | Feature 5 FR-004, FR-005 |
-| PDF includes name, description, Ingredients lines, Steps table; file name is `recipeReport.pdf` | `RecipeReports.js` | Feature 5 FR-006–FR-009 |
-| PDF click does not navigate to edit | `@click.stop` on the PDF icon | Feature 5 FR-010 |
-| Failed ingredient/step fetches are logged; download still proceeds | `.catch(console.log)` then `doc.save` | Feature 5 FR-012 |
+| PDF icon only shows when the user is signed in | `RecipeCardComponent.vue` `v-if="user !== null"` on `mdi-file-pdf-box` | Feature 5 FR-001, FR-002 |
+| Clicking PDF downloads a recipe PDF | `RecipeReports.generateRecipePDF` | Feature 5 FR-003, FR-005 |
+| It loads that recipe's ingredients and steps with the existing GET calls | `RecipeIngredientServices`, `RecipeStepServices` | Feature 5 FR-004 |
+| PDF has name, description, ingredients, and steps. File name is recipeReport.pdf | `RecipeReports.js` | Feature 5 FR-006–FR-009 |
+| Clicking PDF does not open edit | PDF icon on `RecipeCardComponent.vue` | Feature 5 FR-010 |
 
 ## Known defects (documented, not fixed — team decision)
 
