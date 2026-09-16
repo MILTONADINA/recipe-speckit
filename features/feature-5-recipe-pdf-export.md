@@ -17,7 +17,6 @@ I want to see a PDF icon on a recipe card
 So that I know I can download that recipe
 
 **Priority:** P1
-**Independent test:** Open a recipe card while signed in and confirm the PDF icon is shown
 **Acceptance scenarios:** see ### US-5.1 under Acceptance Criteria
 
 ### US-5.2: Hide the PDF control when signed out
@@ -26,7 +25,6 @@ I want recipe cards not to show a PDF icon
 So that PDF download is only for signed-in users
 
 **Priority:** P1
-**Independent test:** Open a recipe card while signed out and confirm the PDF icon is not shown
 **Acceptance scenarios:** see ### US-5.2 under Acceptance Criteria
 
 ### US-5.3: Export a recipe as a PDF
@@ -35,7 +33,6 @@ I want to click the PDF icon and download a PDF of that recipe
 So that I can keep the recipe
 
 **Priority:** P1
-**Independent test:** Click the PDF icon and confirm a PDF of that recipe is downloaded
 **Acceptance scenarios:** see ### US-5.3 under Acceptance Criteria
 
 ### US-5.4: PDF click does not open recipe edit
@@ -44,7 +41,6 @@ I want clicking the PDF icon not to open the edit page
 So that download and edit stay separate
 
 **Priority:** P2
-**Independent test:** Click the PDF icon and confirm the edit page does not open
 **Acceptance scenarios:** see ### US-5.4 under Acceptance Criteria
 
 ---
