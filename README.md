@@ -211,7 +211,7 @@ For this course, **you** write the requirements half and the **data model**. You
 | 2 | [feature-2-recipe-management.md](features/feature-2-recipe-management.md) | `feature/2-recipe-management` | Feature 1 |
 | 3 | [feature-3-ingredient-catalog.md](features/feature-3-ingredient-catalog.md) | `feature/3-ingredient-catalog` | Feature 1 |
 | 4 | [feature-4-public-recipe-publishing-browsing.md](features/feature-4-public-recipe-publishing-browsing.md) | `feature/4-public-recipe-publishing-browsing` | Feature 2 |
-| 5 | *Add `feature-5-….md` after you write the spec* | `feature/5-…` | Feature 2 |
+| 5 | [feature-5-recipe-pdf-export.md](features/feature-5-recipe-pdf-export.md) | `feature/5-recipe-pdf-export` | Feature 2 |
 
 New features: you own requirements + data model; Cursor helps with the remaining design sections. Still follow [features/framework.md](features/framework.md#feature-spec-template) for the overall shape of the file.
 
