@@ -83,7 +83,7 @@ describe("Feature 5 — Recipe PDF Export", () => {
   });
 
   describe("US-5.3 — Export a recipe as a PDF", () => {
-    it("PDF export writes the recipe name, description, ingredients, and steps", async () => {
+    it("PDF export includes the recipe information", async () => {
       getRecipeIngredientsForRecipeMock.mockResolvedValue({
         data: sampleIngredients,
       });
@@ -116,6 +116,30 @@ describe("Feature 5 — Recipe PDF Export", () => {
       expect(tableArg.body[0].stepNumber).toBe(1);
       expect(tableArg.body[0].instruction).toBe("Beat the eggs");
       expect(tableArg.body[0].ingredientList).toBe("Egg");
+    });
+
+    it("PDF export works with no ingredients", async () => {
+      getRecipeIngredientsForRecipeMock.mockResolvedValue({ data: [] });
+      getRecipeStepsForRecipeWithIngredientsMock.mockResolvedValue({
+        data: sampleSteps,
+      });
+
+      await RecipeReports.generateRecipePDF(sampleRecipe);
+
+      expect(saveMock).toHaveBeenCalledWith("recipeReport.pdf");
+    });
+
+    it("PDF export works with no steps", async () => {
+      getRecipeIngredientsForRecipeMock.mockResolvedValue({
+        data: sampleIngredients,
+      });
+      getRecipeStepsForRecipeWithIngredientsMock.mockResolvedValue({
+        data: [],
+      });
+
+      await RecipeReports.generateRecipePDF(sampleRecipe);
+
+      expect(saveMock).toHaveBeenCalledWith("recipeReport.pdf");
     });
 
     it("PDF export saves the file as recipeReport.pdf", async () => {

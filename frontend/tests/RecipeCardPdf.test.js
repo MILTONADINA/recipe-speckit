@@ -103,7 +103,7 @@ describe("Feature 5 — Recipe PDF Export", () => {
     });
   });
 
-  describe("US-5.4 — PDF click does not open recipe edit", () => {
+  describe("US-5.4 — Keep PDF download separate from editing", () => {
     it("PDF export does not navigate to recipe edit", async () => {
       localStorage.setItem("user", JSON.stringify(sampleUser));
       const { wrapper, router } = await mountRecipeCard();
@@ -113,6 +113,7 @@ describe("Feature 5 — Recipe PDF Export", () => {
       await findIcon(wrapper, "mdi-file-pdf-box").trigger("click");
       await flushPromises();
 
+      expect(RecipeReports.generateRecipePDF).toHaveBeenCalledWith(sampleRecipe);
       expect(push).not.toHaveBeenCalled();
     });
   });
